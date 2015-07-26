@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
+  resources :medicines
+
   devise_for :users do
-    match 'users/sign_out' => 'devise/sessions#destroy'
+    match 'users/sign_out' => 'devise/sessions#destroy',
+    :controllers => { :sessions => "users/sessions" }
   end
+  get '/', to: 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
