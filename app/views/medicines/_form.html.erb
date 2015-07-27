@@ -1,3 +1,16 @@
+<style>  
+label {
+    font: normal 12px roboto !important;
+}
+#checkbox-1
+{
+width: 15px;
+height: 15px;
+}
+
+</style>
+
+
 <%= form_for(@medicine) do |f| %>
   <% if @medicine.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +24,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :name, class:"mdl-textfield__input", id:"name_t" %>
+        <%= f.label :name, class:"mdl-textfield__label", for:"name_t" %>
   </div>
-  <div class="field">
-    <%= f.label :availability %><br>
-    <%= f.check_box :availability %>
+
+
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :quantity, class:"mdl-textfield__input", pattern:"-?[0-9]*(\.[0-9]+)?", id:"quantity_t" %>
+        <%= f.label :quantity,class:"mdl-textfield__label", for:"quantity_t" %>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+
   </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :usage, class:"mdl-textfield__input", id:"usage_t" %>
+        <%= f.label :usage, class:"mdl-textfield__label", for:"usage_t" %>
   </div>
-  <div class="field">
-    <%= f.label :usage %><br>
-    <%= f.text_field :usage %>
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :side_effects, class:"mdl-textfield__input", id:"side_effects_t" %>
+        <%= f.label :side_effects, class:"mdl-textfield__label", for:"side_effects_t" %>
   </div>
-  <div class="field">
-    <%= f.label :side_effects %><br>
-    <%= f.text_field :side_effects %>
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.check_box :availability,id:"checkbox-1" %>
+        <%= f.label :availability, for:"checkbox-1"%>
+
+
   </div>
+  
+</label>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Save', class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+    <%= link_to 'Back', medicines_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
   </div>
 <% end %>
