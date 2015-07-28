@@ -51,13 +51,12 @@
     </nav>
   </div>
   <main class="mdl-layout__content">
-    <div class="page-content"><!-- Your content goes here -->
     <div class="page-content"><% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
 <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
-<% end %><%= yield %> <%= render "layouts/footer" %>
+<% end %><%= yield %> 
 
 </div>
   </main>

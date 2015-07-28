@@ -25,10 +25,16 @@ class MedicinesController < ApplicationController
   # POST /medicines.json
   def create
     @medicine = Medicine.new(medicine_params)
+    
+    if @medicine.quantity>0
+      @medicine.availability = true
+    else 
+      @medicine.availability = false
+    end
 
     respond_to do |format|
       if @medicine.save
-        format.html { redirect_to @medicine, notice: 'Medicine was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Medicine was successfully created.' }
         format.json { render :show, status: :created, location: @medicine }
       else
         format.html { render :new }

@@ -1,21 +1,24 @@
 
-<h5>Listing Medicines</h5>
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<section class="section--center mdl-grid mdl-grid--no-spacing">
            
 <div class="demo-grid-1 mdl-grid">
   <div class="mdl-cell mdl-cell--6-col" >
-<%= link_to new_medicine_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 20px; left: 485px; z-index: 10;" do %>
+    <h5>Listing Medicines</h5>
+
+<%= link_to new_medicine_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 35px; left: 600px; z-index: 10;" do %>
 <i class="material-icons">add</i>
 <% end %>
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th class="mdl-data-table__cell--non-numeric">Availability</th>
-      <th>Quantity</th>
+      <th sorting="enabled">Quantity</th>
       <th class="mdl-data-table__cell--non-numeric">Usage</th>
       <th class="mdl-data-table__cell--non-numeric">Side effects</th>
-      <th colspan="3"></th>
+      <th ></th>
+      <th ></th>
+
     </tr>
   </thead>
 
@@ -23,11 +26,16 @@
     <% @medicines.each do |medicine| %>
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.name %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= medicine.availability %></td>
+        <% if medicine.availability? %>
+          <td class="mdl-data-table__cell--non-numeric">Available</td>
+
+        <%else %>
+          <td class="mdl-data-table__cell--non-numeric">Not Available</td>
+
+        <%end%>
         <td><%= medicine.quantity %></td>
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.side_effects %></td>
-        <td><%= link_to 'Show', medicine %></td>
         <td><%= link_to 'Edit', edit_medicine_path(medicine) %></td>
         <td><%= link_to 'Delete', medicine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -42,4 +50,30 @@
 
 
 
-
+<script type="text/javascript">$(document).ready(function(){
+    $('#index-table').dataTable({
+    "bJQueryUI": true,
+    "sPaginationType": "full_numbers",
+    "bPaginate": false,
+    "bFilter": true,
+    "bSort": true,
+    "aaSorting": [
+      [0, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": true,
+      "aTargets": [0,1,2]
+    }, {
+      "bSortable": false,
+      "aTargets": [3,4,5,6]
+    }],"aoColumns": [
+      null,
+      { "bSearchable": false },
+      { "bSearchable": false },
+      null,
+      null,
+      { "bSearchable": false },
+      { "bSearchable": false }
+    ] 
+  });
+});</script>

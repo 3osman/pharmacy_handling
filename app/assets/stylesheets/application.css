@@ -14,5 +14,6 @@
  *= require bootstrap.min.css
  *= require material.min.css
  *= require styles.css
+ *= require jquery.dataTables.css
  *= require_self
  */

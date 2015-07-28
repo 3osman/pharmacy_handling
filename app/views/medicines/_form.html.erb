@@ -1,6 +1,6 @@
 <style>  
-label {
-    font: normal 12px roboto !important;
+label,input {
+    font: normal 14px roboto !important;
 }
 #checkbox-1
 {
@@ -45,12 +45,7 @@ height: 15px;
     <%= f.text_field :side_effects, class:"mdl-textfield__input", id:"side_effects_t" %>
         <%= f.label :side_effects, class:"mdl-textfield__label", for:"side_effects_t" %>
   </div>
-  <div class="mdl-textfield mdl-js-textfield">
-    <%= f.check_box :availability,id:"checkbox-1" %>
-        <%= f.label :availability, for:"checkbox-1"%>
-
-
-  </div>
+  
   
 </label>
   <div class="actions">
