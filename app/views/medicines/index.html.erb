@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 
 <section class="section--center mdl-grid mdl-grid--no-spacing">
            
@@ -5,7 +6,7 @@
   <div class="mdl-cell mdl-cell--6-col" >
     <h5>Listing Medicines</h5>
 
-<%= link_to new_medicine_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 35px; left: 600px; z-index: 10;" do %>
+<%= link_to new_medicine_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 32px; right: 43px; z-index: 10;" do %>
 <i class="material-icons">add</i>
 <% end %>
 <table id="index-table" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
@@ -13,7 +14,7 @@
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th class="mdl-data-table__cell--non-numeric">Availability</th>
-      <th sorting="enabled">Quantity</th>
+      <th>Quantity</th>
       <th class="mdl-data-table__cell--non-numeric">Usage</th>
       <th class="mdl-data-table__cell--non-numeric">Side effects</th>
       <th ></th>

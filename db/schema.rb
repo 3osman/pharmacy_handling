@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727062126) do
+ActiveRecord::Schema.define(version: 20150730105107) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "med_table_entries", force: :cascade do |t|
+    t.integer  "med_table_id"
+    t.integer  "medicine_id"
+    t.string   "instruction"
+    t.string   "duration"
+    t.string   "morning"
+    t.string   "afternoon"
+    t.string   "evening"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "med_tables", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "medicines", force: :cascade do |t|
     t.string   "name"
@@ -47,8 +68,8 @@ ActiveRecord::Schema.define(version: 20150727062126) do
     t.string   "username"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

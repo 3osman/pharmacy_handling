@@ -1,31 +1,66 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Patients</h1>
 
-<table>
+<section class="section--center mdl-grid mdl-grid--no-spacing">
+           
+<div class="demo-grid-1 mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col" >
+
+    <h5>Listing Patients</h5>
+
+<%= link_to new_patient_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 48px; right: 43px; z-index: 10;" do %>
+<i class="material-icons">add</i>
+
+<% end %>
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
   <thead>
     <tr>
-      <th>Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th>Age</th>
-      <th>First check in</th>
-      <th colspan="3"></th>
+      <th class="mdl-data-table__cell--non-numeric">First Check In</th>
+      <th ></th>
+      <th ></th>
+
     </tr>
   </thead>
 
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= patient.name %></td>
+        
+        <td class="mdl-data-table__cell--non-numeric"><%= patient.name %></td>
+
         <td><%= patient.age %></td>
-        <td><%= patient.first_check_in %></td>
-        <td><%= link_to 'Show', patient %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= patient.first_check_in %></td>
         <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+</div>
+</div>
+          </section>
 
-<%= link_to 'New Patient', new_patient_path %>
+
+
+<script type="text/javascript">$(document).ready(function(){
+    $('#index-table').dataTable({
+    "bJQueryUI": true,
+    "sPaginationType": "full_numbers",
+    "bPaginate": false,
+    "bFilter": true,
+    "bSort": true,
+    "aaSorting": [
+      [0, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": true,
+      "aTargets": [0,1]
+    }, {
+      "bSortable": false,
+      "aTargets": [2,3,4]
+    }]
+  });
+});</script>

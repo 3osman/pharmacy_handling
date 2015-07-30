@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  med_table_id: 
+  medicine_id: 
+  instruction: MyString
+  duration: MyString
+  morning: MyString
+  afternoon: MyString
+  evening: MyString
+
+two:
+  med_table_id: 
+  medicine_id: 
+  instruction: MyString
+  duration: MyString
+  morning: MyString
+  afternoon: MyString
+  evening: MyString

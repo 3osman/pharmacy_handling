@@ -1,3 +1,18 @@
+
+
+<style>  
+label,input {
+    font: normal 14px roboto !important;
+}
+#checkbox-1
+{
+width: 15px;
+height: 15px;
+}
+
+</style>
+
+
 <%= form_for(@patient) do |f| %>
   <% if @patient.errors.any? %>
     <div id="error_explanation">
@@ -11,19 +26,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :name, class:"mdl-textfield__input", id:"name_t" %>
+        <%= f.label :name, class:"mdl-textfield__label", for:"name_t" %>
   </div>
-  <div class="field">
-    <%= f.label :age %><br>
-    <%= f.number_field :age %>
+
+
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :age, class:"mdl-textfield__input", pattern:"-?[0-9]*(\.[0-9]+)?", id:"age_t" %>
+        <%= f.label :age,class:"mdl-textfield__label", for:"age_t" %>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+
   </div>
-  <div class="field">
-    <%= f.label :first_check_in %><br>
-    <%= f.date_select :first_check_in %>
+<div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :first_check_in, class:"mdl-textfield__input", id:"usage_t" %>
+        <%= f.label :first_check_in, class:"mdl-textfield__label", for:"usage_t" %>
   </div>
+
+  
+  
+</label>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Save', class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+    <%= link_to 'Back', patients_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
   </div>
 <% end %>
