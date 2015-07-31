@@ -15,5 +15,6 @@
  *= require material.min.css
  *= require styles.css
  *= require jquery.dataTables.css
+ *= require bootstrap-material-datetimepicker.css
  *= require_self
  */

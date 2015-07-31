@@ -1,7 +1,7 @@
 
 
 <style>  
-label,input {
+label,input,td {
     font: normal 14px roboto !important;
 }
 #checkbox-1
@@ -40,8 +40,27 @@ height: 15px;
 
   </div>
 <div class="mdl-textfield mdl-js-textfield">
-    <%= f.text_field :first_check_in, class:"mdl-textfield__input", id:"usage_t" %>
-        <%= f.label :first_check_in, class:"mdl-textfield__label", for:"usage_t" %>
+    <%= f.text_field :first_check_in, class:"mdl-textfield__input",id:"usage_t" %>
+            <%= f.label :first_check_in,class:"mdl-textfield__label", for:"usage_t", id:"label_date" %>
+
+    <script type="text/javascript">
+    function f1() {
+    document.getElementById("label_date").innerHTML = "";
+}
+window.onload = function() {
+    document.getElementById("usage_t").onclick = function fun() {
+        f1();
+        //validation code to see State field is mandatory.  
+    }
+}
+    $('#usage_t').bootstrapMaterialDatePicker(
+{
+format:"DD-MM-YYYY",
+  time:false
+}
+      );
+
+  </script>
   </div>
 
   

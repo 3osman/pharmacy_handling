@@ -10,10 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require moment-with-locales.min
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery.dataTables.js
+//= require jquery.dataTables
+//= require knockout-3.3.0
 //= require bootstrap.min
 //= require material.min
+//= require bootstrap-material-datetimepicker
 //= require_tree .
