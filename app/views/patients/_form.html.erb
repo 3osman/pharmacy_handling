@@ -4,19 +4,16 @@
 label,input {
     font: normal 14px roboto !important;
 }
-#checkbox-1
-{
-width: 15px;
-height: 15px;
-}
 
+.field_with_errors{background-color: transparent;}
+#error_explanation{background-color: transparent;}
 </style>
 
 
 <%= form_for(@patient) do |f| %>
   <% if @patient.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+      
 
       <ul>
       <% @patient.errors.full_messages.each do |message| %>

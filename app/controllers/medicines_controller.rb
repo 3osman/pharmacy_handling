@@ -26,7 +26,7 @@ class MedicinesController < ApplicationController
   def create
     @medicine = Medicine.new(medicine_params)
     
-    if @medicine.quantity>0
+    if !@medicine.quantity.nil? && @medicine.quantity>0
       @medicine.availability = true
     else 
       @medicine.availability = false
