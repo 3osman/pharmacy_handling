@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   end
   get '/prescription', to: 'paper#first_step' , as: :prescription
   get '/', to: 'static_pages#home', as: :root
+  get '/choose-medicine', to: 'paper#generate_pdf' , as: :choose
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

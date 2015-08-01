@@ -40,7 +40,7 @@ td,tr {
 
 					        <td style="font-size:12px;"><%= patient.age %></td>
 					        <td class="mdl-data-table__cell--non-numeric" style="font-size:12px;"><%= patient.first_check_in %></td>
-        					<td><%= link_to 'Choose', edit_patient_path(patient),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        					<td><%= link_to 'Choose', choose_path(:patient => patient.id),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
 
 					      </tr>
 					    <% end %>

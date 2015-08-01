@@ -3,5 +3,10 @@ class PaperController < ApplicationController
   end
 
   def generate_pdf
+  	@patient = Patient.find(params[:patient])
+  	medtable = MedTable.new
+  	medtable.patient = @patient
+  	medtable.save!
+
   end
 end
