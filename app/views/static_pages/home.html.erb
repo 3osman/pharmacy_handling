@@ -76,8 +76,8 @@
   </div>
   <div class="mdl-card__actions mdl-card--border">
     <% if user_signed_in? %>
-   <%= link_to "Medicines", medicines_path,class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
-        <%= link_to "Patients", patients_path,class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+   <%= link_to 'New Prescription', prescription_path,class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+        
   
 <% else %>
   

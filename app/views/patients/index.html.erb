@@ -7,11 +7,11 @@
 
     <h5>Listing Patients</h5>
 
-<%= link_to new_patient_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 48px; right: 43px; z-index: 10;" do %>
+<%= link_to new_patient_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 33px; right: 43px; z-index: 10;" do %>
 <i class="material-icons">add</i>
 
 <% end %>
-<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
@@ -61,6 +61,13 @@
     }, {
       "bSortable": false,
       "aTargets": [2,3,4]
+    },{
+      "bSearchable": false, 
+      "aTargets": [ 3,4 ]
+
     }]
-  });
+  ,"oLanguage": { "sSearch": "" },
+   "bInfo" : false
+
+});
 });</script>

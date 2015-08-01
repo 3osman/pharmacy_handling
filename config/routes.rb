@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'paper/first_step'
+
+  get 'paper/generate_pdf'
+
   resources :patients
   get 'static_pages/home'
 
@@ -8,7 +12,8 @@ Rails.application.routes.draw do
     match 'users/sign_out' => 'devise/sessions#destroy',
     :controllers => { :sessions => "users/sessions" }
   end
-  get '/', to: 'static_pages#home'
+  get '/prescription', to: 'paper#first_step' , as: :prescription
+  get '/', to: 'static_pages#home', as: :root
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

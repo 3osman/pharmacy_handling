@@ -12,24 +12,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <style type="text/css">
+
+  </style>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Pharmacy System</span>
+      <%= link_to "Pharmacy System", root_path,class: "mdl-layout-title",style:"text-decoration:none;color: white; background-color: transparent;"%>
+
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-       
+
+
         <% if user_signed_in? %>
-   <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link" %>
-        <%= link_to "Patients", patients_path,class: "mdl-navigation__link" %>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link") %>        
+          <%= link_to "Prescription", prescription_path,class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %>
+
+   <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %>
+        <%= link_to "Patients", patients_path,class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link",style:"text-decoration:none;color: white;") %>        
   
 <% else %>
   
-  <%= link_to('Login', new_user_session_path, class: "mdl-navigation__link" ) %>  
+  <%= link_to('Login', new_user_session_path, class: "mdl-navigation__link",style:"text-decoration:none;color: white;" ) %>  
   
 <% end %>
       </nav>
@@ -38,15 +45,17 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Navigation</span>
     <nav class="mdl-navigation">
-      
+   
         <% if user_signed_in? %>
-  <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link" %>
-        <%= link_to "Patients", patients_path,class: "mdl-navigation__link" %>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link") %>        
+                  <%= link_to "Prescription", prescription_path,class: "mdl-navigation__link" ,style:"text-decoration:none;color: black;"%>
+
+  <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link",style:"text-decoration:none;color: black;" %>
+        <%= link_to "Patients", patients_path,class: "mdl-navigation__link",style:"text-decoration:none;color: black;" %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link",style:"text-decoration:none;color: black;") %>        
   
 <% else %>
   
-  <%= link_to('Login', new_user_session_path, class: "mdl-navigation__link" ) %>  
+  <%= link_to('Login', new_user_session_path, class: "mdl-navigation__link",style:"text-decoration:none;color: black;" ) %>  
   
 <% end %>
     </nav>
