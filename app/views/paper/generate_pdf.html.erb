@@ -1,2 +1,133 @@
-<h1>Paper#generate_pdf</h1>
-<p>Find me in app/views/paper/generate_pdf.html.erb</p>
+           
+<div class="demo-grid-1 mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col" >
+    <h5>Add to Prescription</h5>
+
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Type</th>
+
+      
+      <th class="mdl-data-table__cell--non-numeric">Usage</th>
+      <th class="mdl-data-table__cell--non-numeric">Side effects</th>
+      <th class="mdl-data-table__cell--non-numeric">Availability</th>
+      <th>Quantity</th>
+      <th ><button id="add-b" class= 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab' style="bottom:20px; z-index: 10;">
+<i class="material-icons">add</i>
+</button>
+<div class="mdl-tooltip" for="add-b">
+New Medicine
+</div> </th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Medicine.all.each do |medicine| %>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.name %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.type %></td>
+        
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.side_effects %></td>
+        <% if medicine.availability? %>
+          <td class="mdl-data-table__cell--non-numeric">Available</td>
+
+        <%else %>
+          <td class="mdl-data-table__cell--non-numeric">Not Available</td>
+
+        <%end%>
+        <td><%= medicine.quantity %></td>
+         <td><button value='Choose' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="bottom:8px;text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" data-id="<%= medicine.id %>" data-name="<%= medicine.name %>"> Choose</button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>  
+  <div class="mdl-cell mdl-cell--2-col" >
+  </div>
+  <div class="mdl-cell mdl-cell--2-col" >
+    <h5>Prescription</h5>
+    <%@entries = MedTableEntry.where(med_table_id: @medtable_id) %>
+    <%if @entries.nil? || @entries.empty?%>
+    No prescriptions yet
+    <%else%>
+    <table id="pre-table" class="mdl-data-table mdl-js-data-table">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    
+      <%@entries.each do |e|%>
+      <tr>
+       <td>
+        <%= e.instruction %>
+      </td>
+      <td>
+        <button value='Delete' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="bottom:8px;text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" > Delete</button>
+      </td>
+     </tr>
+       
+    <%end%>
+  </tbody>
+</table>
+<%end%>
+</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#index-table').dataTable({
+    "bJQueryUI": true,
+    "sPaginationType": "full_numbers",
+    "bPaginate": false,
+    "bFilter": true,
+    "bSort": true,
+    "aaSorting": [
+      [0, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": true,
+      "aTargets": [0,1,4,5]
+    }, {
+      "bSortable": false,
+      "aTargets": [2,3,6]
+    }],"aoColumns": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      { "bSearchable": false }
+    ] 
+  ,"oLanguage": { "sSearch": "" } ,
+  "bInfo" : false
+
+});
+    $('#pre-table').dataTable({
+      "oLanguage": { "sSearch": "" } ,
+  "bInfo" : false,
+  "bPaginate": false,
+  "aoColumnDefs": [{
+    "bSortable" : false,
+    "aTargets" : [1]
+
+  },
+  {
+    "bSearchable": false,
+    "aTargets":[1]
+  }]
+    });
+});</script>

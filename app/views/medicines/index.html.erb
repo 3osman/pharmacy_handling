@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <section class="section--center mdl-grid mdl-grid--no-spacing">
            
@@ -6,19 +5,25 @@
   <div class="mdl-cell mdl-cell--6-col" >
     <h5>Listing Medicines</h5>
 
-<%= link_to new_medicine_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 32px; right: 43px; z-index: 10;" do %>
-<i class="material-icons">add</i>
-<% end %>
-<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
-      <th class="mdl-data-table__cell--non-numeric">Availability</th>
-      <th>Quantity</th>
+      <th class="mdl-data-table__cell--non-numeric">Type</th>
+
+      
       <th class="mdl-data-table__cell--non-numeric">Usage</th>
       <th class="mdl-data-table__cell--non-numeric">Side effects</th>
+      <th class="mdl-data-table__cell--non-numeric">Availability</th>
+      <th>Quantity</th>
       <th ></th>
-      <th ></th>
+      <th ><%= link_to new_medicine_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px; z-index: 10;" do %>
+<i class="material-icons">add</i>
+<% end %>
+<div class="mdl-tooltip" for="add-b">
+New Medicine
+</div></th>
 
     </tr>
   </thead>
@@ -27,6 +32,10 @@
     <% @medicines.each do |medicine| %>
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.name %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.type %></td>
+        
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.side_effects %></td>
         <% if medicine.availability? %>
           <td class="mdl-data-table__cell--non-numeric">Available</td>
 
@@ -35,10 +44,8 @@
 
         <%end%>
         <td><%= medicine.quantity %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= medicine.side_effects %></td>
-        <td><%= link_to 'Edit', edit_medicine_path(medicine) %></td>
-        <td><%= link_to 'Delete', medicine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_medicine_path(medicine),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td><%= link_to 'Delete', medicine, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -63,14 +70,15 @@
     ],
     "aoColumnDefs": [{
       "bSortable": true,
-      "aTargets": [0,1,2]
+      "aTargets": [0,1,4,5]
     }, {
       "bSortable": false,
-      "aTargets": [3,4,5,6]
+      "aTargets": [2,3,6,7]
     }],"aoColumns": [
       null,
-      { "bSearchable": false },
-      { "bSearchable": false },
+      null,
+      null,
+      null,
       null,
       null,
       { "bSearchable": false },

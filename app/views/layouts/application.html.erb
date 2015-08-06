@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <%= csrf_meta_tags %>
+  <style>  
+label,input {
+    font: normal 14px roboto !important;
+}
+
+</style>
 </head>
 <body>
   <style type="text/css">
@@ -71,8 +77,72 @@
 </div>
   </main>
 </div>
-     
+    <!-- Modal -->
+<div class="modal fade" id="chooseMedicineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Options</h4>
+      </div>
+<%= form_tag('/paper/add_to_medicines') do -%>
 
+      <div class="modal-body">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" name="instructions" id="instructions" />
+            <label class="mdl-textfield__label" for="sample1">Instructions</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" name="duration" id="duration" />
+            <label class="mdl-textfield__label" for="duration">Duration (Two weeks, One day, etc..)</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" name="morning" id="morning" pattern="-?[0-9]*(\.[0-9]+)?"/>
+            <label class="mdl-textfield__label" for="morning">Morning (Number of Pills)</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" name="afternoon" id="afternoon" pattern="-?[0-9]*(\.[0-9]+)?" />
+            <label class="mdl-textfield__label" for="afternoon">Afternoon (Number of Pills)</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" name="evening" id="evening" pattern="-?[0-9]*(\.[0-9]+)?" />
+            <label class="mdl-textfield__label" for="evening">Evening (Number of Pills)</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+          </div>
+          <input type="hidden" name="medid" id="med-id">
+          <input type="hidden" name="medtableid" id="medtable-id" value="<%=@medtable_id%>">
+          <input type="hidden" name="patient" id="patient" value="<%=@patient_id%>">
+
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-dismiss="modal">Close</button>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Save changes</button>
+      </div>
+    </div>
+  </div>
+<% end -%>  
+</div> 
+<script type="text/javascript">
+
+$('#chooseMedicineModal').on('show.bs.modal', function(e) {
+
+    //get data-id attribute of the clicked element
+    var medId = $(e.relatedTarget).data('id');
+    var medName = $(e.relatedTarget).data('name');
+    //populate the textbox
+    $('.modal-header #myModalLabel').text(medName);
+    document.getElementById("med-id").value = medId;
+
+  });
+</script>
 </body>
 
 </html>

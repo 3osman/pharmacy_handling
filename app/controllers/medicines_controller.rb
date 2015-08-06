@@ -34,7 +34,8 @@ class MedicinesController < ApplicationController
 
     respond_to do |format|
       if @medicine.save
-        format.html { redirect_to action: "index", notice: 'Medicine was successfully created.' }
+        flash[:notice] = 'Medicine was successfully created.'
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :created, location: @medicine }
       else
         format.html { render :new }
@@ -48,7 +49,15 @@ class MedicinesController < ApplicationController
   def update
     respond_to do |format|
       if @medicine.update(medicine_params)
-        format.html { redirect_to @medicine, notice: 'Medicine was successfully updated.' }
+        if !@medicine.quantity.nil? && @medicine.quantity>0
+          @medicine.availability = true
+        else
+          @medicine.availability = false
+        end
+        @medicine.save!
+
+        flash[:notice] = 'Medicine was successfully updated.'
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :ok, location: @medicine }
       else
         format.html { render :edit }

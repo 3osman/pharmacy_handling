@@ -26,14 +26,11 @@ label,input {
         <%= f.label :name, class:"mdl-textfield__label", for:"name_t" %>
   </div>
 
-
 <div class="mdl-textfield mdl-js-textfield">
-    <%= f.text_field :quantity, class:"mdl-textfield__input", pattern:"-?[0-9]*(\.[0-9]+)?", id:"quantity_t" %>
-        <%= f.label :quantity,class:"mdl-textfield__label", for:"quantity_t" %>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-
-
+    <%= f.text_field :type, class:"mdl-textfield__input", id:"type_t" %>
+        <%= f.label :type, class:"mdl-textfield__label", for:"type_t" %>
   </div>
+
 <div class="mdl-textfield mdl-js-textfield">
     <%= f.text_field :usage, class:"mdl-textfield__input", id:"usage_t" %>
         <%= f.label :usage, class:"mdl-textfield__label", for:"usage_t" %>
@@ -41,6 +38,13 @@ label,input {
 <div class="mdl-textfield mdl-js-textfield">
     <%= f.text_field :side_effects, class:"mdl-textfield__input", id:"side_effects_t" %>
         <%= f.label :side_effects, class:"mdl-textfield__label", for:"side_effects_t" %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :quantity, class:"mdl-textfield__input", pattern:"-?[0-9]*(\.[0-9]+)?", id:"quantity_t" %>
+        <%= f.label :quantity,class:"mdl-textfield__label", for:"quantity_t" %>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+
   </div>
   
   

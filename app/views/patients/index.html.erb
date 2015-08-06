@@ -7,18 +7,22 @@
 
     <h5>Listing Patients</h5>
 
-<%= link_to new_patient_path, method: :get, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored', style:"top: 33px; right: 43px; z-index: 10;" do %>
-<i class="material-icons">add</i>
 
-<% end %>
 <table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th>Age</th>
+      <th class="mdl-data-table__cell--non-numeric">Phone Number</th>
+
       <th class="mdl-data-table__cell--non-numeric">First Check In</th>
       <th ></th>
-      <th ></th>
+      <th ><%= link_to new_patient_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect',style:"bottom:20px; z-index: 10;" do %>
+<i class="material-icons">add</i>
+
+<% end %><div class="mdl-tooltip" for="add-b">
+New Patient
+</div></th>
 
     </tr>
   </thead>
@@ -30,9 +34,10 @@
         <td class="mdl-data-table__cell--non-numeric"><%= patient.name %></td>
 
         <td><%= patient.age %></td>
+        <td><%= patient.phone_number%></td>
         <td class="mdl-data-table__cell--non-numeric"><%= patient.first_check_in %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_patient_path(patient),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td><%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -60,10 +65,10 @@
       "aTargets": [0,1]
     }, {
       "bSortable": false,
-      "aTargets": [2,3,4]
+      "aTargets": [2,3,4,5]
     },{
       "bSearchable": false, 
-      "aTargets": [ 3,4 ]
+      "aTargets": [ 4,5 ]
 
     }]
   ,"oLanguage": { "sSearch": "" },

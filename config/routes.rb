@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'paper/first_step'
 
   get 'paper/generate_pdf'
+  post 'paper/add_to_medicines', as: :add_m 
 
   resources :patients
   get 'static_pages/home'
