@@ -52,6 +52,7 @@ New Medicine
   </div>
   <div class="mdl-cell mdl-cell--2-col" >
     <h5>Prescription</h5>
+    <%@medtable_id%>
     <%@entries = MedTableEntry.where(med_table_id: @medtable_id) %>
     <%if @entries.nil? || @entries.empty?%>
     No prescriptions yet
@@ -60,6 +61,8 @@ New Medicine
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Instructions</th>
+
       <th></th>
     </tr>
   </thead>
@@ -69,16 +72,22 @@ New Medicine
       <%@entries.each do |e|%>
       <tr>
        <td>
-        <%= e.instruction %>
+        <%= e.medicine.name %>
       </td>
       <td>
-        <button value='Delete' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="bottom:8px;text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" > Delete</button>
+        <%= e.instruction%>
+      </td>
+      <td>
+        <%= link_to 'Delete', {:action => :delete_entry, :controller => :paper, :patient=> @patient_id,:medtableid=> @medtable_id,:med_id => e.id}, :method => :post,class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", style:"bottom:8px;text-decoration:none;font-size:12px;" %>
+
+       
       </td>
      </tr>
        
     <%end%>
   </tbody>
 </table>
+<button value='Generate PDF' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="left:140px; top:8px;text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" > Generate PDF</button>
 <%end%>
 </div>
 </div>
@@ -122,12 +131,12 @@ $(document).ready(function(){
   "bPaginate": false,
   "aoColumnDefs": [{
     "bSortable" : false,
-    "aTargets" : [1]
+    "aTargets" : [1,2]
 
   },
   {
     "bSearchable": false,
-    "aTargets":[1]
+    "aTargets":[2]
   }]
     });
 });</script>

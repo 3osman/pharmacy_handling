@@ -28,10 +28,22 @@ class PaperController < ApplicationController
     medTableEntry.evening = params[:evening]
     medTableEntry.save!
     #@medtable_id = params[:medtableid]
-    @from_add = true
     #@medicines_add.push("dfd")
+    @from_add = true
+    flash[:notice] = "Added"
+
     redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
 
+  end
+  def delete_entry
+    MedTableEntry.destroy(params[:med_id])
+    respond_to do |format|
+        flash[:notice] = "Deleted"
+        @from_add = true
+
+        format.html { redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add }
+    end
+    
   end
 end
 
