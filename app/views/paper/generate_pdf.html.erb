@@ -1,4 +1,17 @@
-           
+  <style>  
+label,input {
+    font: normal 14px roboto !important;
+}
+h5{
+    font: normal 20px roboto !important;
+}
+td,tr {
+      font: normal 12px roboto !important;
+
+  }
+.field_with_errors{background-color: transparent;}
+#error_explanation{background-color: transparent;}
+</style>         
 <div class="demo-grid-1 mdl-grid">
   <div class="mdl-cell mdl-cell--6-col" >
     <h5>Add to Prescription</h5>
@@ -14,12 +27,7 @@
       <th class="mdl-data-table__cell--non-numeric">Side effects</th>
       <th class="mdl-data-table__cell--non-numeric">Availability</th>
       <th>Quantity</th>
-      <th ><button id="add-b" class= 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab' style="bottom:20px; z-index: 10;">
-<i class="material-icons">add</i>
-</button>
-<div class="mdl-tooltip" for="add-b">
-New Medicine
-</div> </th>
+     <th></th>
 
     </tr>
   </thead>
@@ -52,7 +60,6 @@ New Medicine
   </div>
   <div class="mdl-cell mdl-cell--2-col" >
     <h5>Prescription</h5>
-    <%@medtable_id%>
     <%@entries = MedTableEntry.where(med_table_id: @medtable_id) %>
     <%if @entries.nil? || @entries.empty?%>
     No prescriptions yet
@@ -87,7 +94,20 @@ New Medicine
     <%end%>
   </tbody>
 </table>
-<button value='Generate PDF' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="left:140px; top:8px;text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" > Generate PDF</button>
+<%= form_tag('/paper/add_to_medicines') do -%>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= text_field_tag :date, nil, class:"mdl-textfield__input" %>
+    <%= label_tag :date, "Date", class:"mdl-textfield__label" %>
+    <script type="text/javascript">
+$('#date').bootstrapMaterialDatePicker(
+{
+format:"DD-MM-YYYY",
+  time:false
+}
+      );</script>
+  </div>
+<button value='Generate PDF' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="left:168px; text-decoration:none;font-size:12px;" data-toggle="modal" id="choose-medicine" data-target="#chooseMedicineModal" > Generate PDF</button>
+<%end%>
 <%end%>
 </div>
 </div>
@@ -96,6 +116,8 @@ New Medicine
 
 
 <script type="text/javascript">
+
+
 $(document).ready(function(){
     $('#index-table').dataTable({
     "bJQueryUI": true,

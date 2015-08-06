@@ -1,0 +1,71 @@
+
+
+<style>  
+label,input {
+    font: normal 14px roboto !important;
+}
+h5{
+    font: normal 20px roboto !important;
+}
+td,tr {
+      font: normal 12px roboto !important;
+
+  }
+
+</style>
+
+
+<%= form_for(@patient) do |f| %>
+ 
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :name, class:"mdl-textfield__input", id:"name_t" %>
+        <%= f.label :name, class:"mdl-textfield__label", for:"name_t" %>
+  </div>
+<input type='hidden' id='from_pre' name='from_pre' value ='true' /> 
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :age, class:"mdl-textfield__input", pattern:"-?[0-9]*(\.[0-9]+)?", id:"age_t" %>
+        <%= f.label :age,class:"mdl-textfield__label", for:"age_t" %>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+
+
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :phone_number, class:"mdl-textfield__input", id:"ph_t" %>
+        <%= f.label :phone_number,class:"mdl-textfield__label", for:"ph_t" %>
+
+
+  </div>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :first_check_in, class:"mdl-textfield__input",id:"usage_t" %>
+            <%= f.label :first_check_in,class:"mdl-textfield__label", for:"usage_t", id:"label_date" %>
+
+    <script type="text/javascript">
+    function f1() {
+    document.getElementById("label_date").innerHTML = "";
+}
+window.onload = function() {
+    document.getElementById("usage_t").onclick = function fun() {
+        f1();
+        //validation code to see State field is mandatory.  
+    }
+}
+    $('#usage_t').bootstrapMaterialDatePicker(
+{
+format:"DD-MM-YYYY",
+  time:false
+}
+      );
+
+  </script>
+  </div>
+
+  
+  
+</label>
+  <div class="actions">
+    <%= f.submit 'Save', class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+    <%= link_to 'Back', patients_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
+  </div>
+<% end %>

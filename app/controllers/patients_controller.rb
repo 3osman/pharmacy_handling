@@ -27,13 +27,25 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
 
     respond_to do |format|
-      if @patient.save
-        flash[:notice] = 'Patient was successfully created.'
-        format.html { redirect_to action: "index" }
-        format.json { render :show, status: :created, location: @patient }
+      if !params[:from_pre]
+        if @patient.save
+          flash[:notice] = 'Patient was successfully created.'
+          format.html { redirect_to action: "index" }
+          format.json { render :show, status: :created, location: @patient }
+        else
+          format.html { render :new }
+          format.json { render json: @patient.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
+        if @patient.save
+          flash[:notice] = 'Patient was successfully created and chosen'
+          format.html { redirect_to choose_path(:patient => @patient.id) }
+          format.json { render :show, status: :created, location: @patient }
+        else
+
+          format.html { redirect_to prescription_path, alert:'Name can not be empty' }
+          format.json { render json: @patient.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
