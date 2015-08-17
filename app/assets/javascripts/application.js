@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.dataTables
 //= require knockout-3.3.0
 //= require bootstrap.min
 //= require material.min

@@ -11,12 +11,9 @@
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th class="mdl-data-table__cell--non-numeric">Type</th>
-
-      
+      <th class="mdl-data-table__cell--non-numeric">Category</th>
       <th class="mdl-data-table__cell--non-numeric">Usage</th>
-      <th class="mdl-data-table__cell--non-numeric">Side effects</th>
-      <th class="mdl-data-table__cell--non-numeric">Availability</th>
-      <th>Quantity</th>
+      
       <th ></th>
       <th ><%= link_to new_medicine_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px; z-index: 10;" do %>
 <i class="material-icons">add</i>
@@ -32,18 +29,10 @@ New Medicine
     <% @medicines.each do |medicine| %>
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.name %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= medicine.type %></td>
-        
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.m_type %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.category %></td>       
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= medicine.side_effects %></td>
-        <% if medicine.availability? %>
-          <td class="mdl-data-table__cell--non-numeric">Available</td>
-
-        <%else %>
-          <td class="mdl-data-table__cell--non-numeric">Not Available</td>
-
-        <%end%>
-        <td><%= medicine.quantity %></td>
+       
         <td><%= link_to 'Edit', edit_medicine_path(medicine),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
         <td><%= link_to 'Delete', medicine, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
       </tr>
@@ -62,25 +51,26 @@ New Medicine
     $('#index-table').dataTable({
     "bJQueryUI": true,
     "sPaginationType": "full_numbers",
-    "bPaginate": false,
+    "bPaginate": true,
     "bFilter": true,
     "bSort": true,
+    "sDom": '<"top"flp>rt<"bottom"i><"clear">',
+
     "aaSorting": [
       [0, "asc"]
     ],
     "aoColumnDefs": [{
       "bSortable": true,
-      "aTargets": [0,1,4,5]
+      "aTargets": [0,1,2]
     }, {
       "bSortable": false,
-      "aTargets": [2,3,6,7]
+      "aTargets": [3,4,5]
     }],"aoColumns": [
       null,
       null,
       null,
       null,
-      null,
-      null,
+     
       { "bSearchable": false },
       { "bSearchable": false }
     ] 
