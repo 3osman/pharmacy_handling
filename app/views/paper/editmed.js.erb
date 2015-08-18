@@ -1,0 +1,6 @@
+$modal = $('#editMedicineModal'),
+$modalBody = $('#editMedicineModal .modal-body'),
+$modalHeading = $('#editMedicineModal .modal-heading');
+$modalHeading.html("<%= @medTableEntry.medicine.name %>");
+$modalBody.html("<%= escape_javascript(render @medTableEntry) %>");
+$modal.modal();

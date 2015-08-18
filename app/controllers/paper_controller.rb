@@ -63,7 +63,16 @@ class PaperController < ApplicationController
 
 
   end
+  def editmed
 
+    
+    @medTableEntry = MedTableEntry.find(params[:med_table_entry_id])
+    respond_to do |format|
+        format.html # editmed.html.erb
+        format.js # editmed.js.erb
+        format.json { render json: @medTableEntry }
+    end
+  end
   def download_pdf
     @date = params[:date]
     @medicines = Array.new
@@ -93,8 +102,16 @@ class PaperController < ApplicationController
   end
   def add_to_medicines
     medTableEntry = MedTableEntry.new
-    medTableEntry.med_table_id = params[:medtableid]
-    medTableEntry.medicine_id = params[:medid]
+
+    if !params[:fromedit]
+      medTableEntry.med_table_id = params[:medtableid]
+      medTableEntry.medicine_id = params[:medid]
+      flash[:notice] = "Added"
+    else
+      medTableEntry = MedTableEntry.find(params[:id])
+      flash[:notice] = "Edited"
+    end
+    
     medTableEntry.instruction = params[:instructions]
     medTableEntry.duration = params[:duration]
     medTableEntry.morning = params[:morning]
@@ -104,7 +121,6 @@ class PaperController < ApplicationController
     #@medtable_id = params[:medtableid]
     #@medicines_add.push("dfd")
     @from_add = true
-    flash[:notice] = "Added"
 
     redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
 

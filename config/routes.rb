@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'paper/add_to_medicines', as: :add_m 
   post 'paper/delete_entry'
   post 'paper/download_pdf'
+  get 'paper/editmed'
 
   resources :patients
   get 'static_pages/home'

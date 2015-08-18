@@ -28,7 +28,6 @@ td,tr {
       <th class="mdl-data-table__cell--non-numeric">Instructions</th>
 
       <th></th>
-      <th></th>
 
     </tr>
   </thead>
@@ -44,17 +43,22 @@ td,tr {
         <%= e.instruction%>
       </td>
        
-        
-       <td><%= link_to(
+ <% if false %>
+       
+       <td>
+
+
+
+<%= link_to(
       url_for(
-        :controller => :paper, :action => :delete_entry,
+        :controller => :paper, :action => :editmed,
          :patient=> @patient_id,:medtableid=> @medtable_id,:med_table_entry_id => e.id
       ),
-      :method => :post,class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style:"bottom:8px;text-decoration:none;font-size:12px;")  do %>
+      :method => :get,remote: true ,class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style:"bottom:8px;text-decoration:none;font-size:12px;")  do %>
        
 
-          Edit
-        <% end %></td>
+Edit
+        <% end %></td><%end%>
       <td><%= link_to(
       url_for(
         :controller => :paper, :action => :delete_entry,
@@ -147,7 +151,6 @@ format:"DD-MM-YYYY",
 
 $(document).ready(function(){
     $('#index-table').dataTable({
-    "bJQueryUI": true,
     "sPaginationType": "simple_numbers",
     "bPaginate": true,
     "bFilter": true,
@@ -185,11 +188,11 @@ $('#pre-table').dataTable({
   "bPaginate": false,
   "aoColumnDefs": [{
     "bSortable" : false,
-    "aTargets" : [2,3]
+    "aTargets" : [2]
   },
   {
     "bSearchable": false,
-    "aTargets":[2,3]
+    "aTargets":[2]
   }]
     });
 });</script>
