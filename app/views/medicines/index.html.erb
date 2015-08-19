@@ -15,12 +15,12 @@
       <th class="mdl-data-table__cell--non-numeric">Usage</th>
       
       <th ></th>
-      <th ><%= link_to new_medicine_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px; z-index: 10;" do %>
+      <th ><%if current_user.try(:admin?)%><%= link_to new_medicine_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px; z-index: 10;" do %>
 <i class="material-icons">add</i>
 <% end %>
 <div class="mdl-tooltip" for="add-b">
 New Medicine
-</div></th>
+</div><%end%></th>
 
     </tr>
   </thead>

@@ -26,8 +26,20 @@ td,tr {
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
       <th class="mdl-data-table__cell--non-numeric">Instructions</th>
+      <th class="mdl-data-table__cell--non-numeric">Duration</th>
+      <th class="mdl-data-table__cell--non-numeric">Morning</th>
+      <th class="mdl-data-table__cell--non-numeric">Afternoon</th>
+      <th class="mdl-data-table__cell--non-numeric">Evening</th>
 
-      <th></th>
+      <th><%= link_to  url_for(
+        :controller => :paper, :action => :add_empty,
+         :patient=> @patient_id,:medtableid=> @medtable_id
+      ), method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px; z-index: 10;" do %>
+<i class="material-icons">add</i>
+<% end %>
+<div class="mdl-tooltip" for="add-b">
+Add Empty Row
+</div></th>
 
     </tr>
   </thead>
@@ -37,10 +49,24 @@ td,tr {
       <%@entries.each do |e|%>
       <tr>
        <td>
+        <% if e.medicine %>
         <%= e.medicine.name %>
+        <%end%>
       </td>
       <td>
         <%= e.instruction%>
+      </td>
+      <td>
+        <%= e.duration%>
+      </td>
+      <td>
+        <%= e.morning%>
+      </td>
+      <td>
+        <%= e.afternoon%>
+      </td>
+      <td>
+        <%= e.evening%>
       </td>
        
  <% if false %>
@@ -188,11 +214,11 @@ $('#pre-table').dataTable({
   "bPaginate": false,
   "aoColumnDefs": [{
     "bSortable" : false,
-    "aTargets" : [2]
+    "aTargets" : [2,3,4,5,6]
   },
   {
     "bSearchable": false,
-    "aTargets":[2]
+    "aTargets":[2,3,4,5,6]
   }]
     });
 });</script>

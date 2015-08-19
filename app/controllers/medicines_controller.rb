@@ -14,7 +14,12 @@ class MedicinesController < ApplicationController
 
   # GET /medicines/new
   def new
-    @medicine = Medicine.new
+    if current_user.try(:admin?)
+      @medicine = Medicine.new
+    else
+      flash[:alert] = 'You are not an Admin'
+      redirect_to action: "index"
+    end
   end
 
   # GET /medicines/1/edit

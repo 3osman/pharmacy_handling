@@ -125,6 +125,20 @@ class PaperController < ApplicationController
     redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
 
   end
+  def add_empty
+    medTableEntry = MedTableEntry.new
+
+    medTableEntry.med_table_id = params[:medtableid]
+    flash[:notice] = "Added Empty Row"
+   
+    medTableEntry.save!
+    #@medtable_id = params[:medtableid]
+    #@medicines_add.push("dfd")
+    @from_add = true
+
+    redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
+
+  end
   def delete_entry
     MedTableEntry.destroy(params[:med_table_entry_id])
     respond_to do |format|

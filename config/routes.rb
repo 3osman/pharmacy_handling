@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'paper/generate_pdf'
   post 'paper/add_to_medicines', as: :add_m 
+  get 'paper/add_empty'
+
   post 'paper/delete_entry'
   post 'paper/download_pdf'
   get 'paper/editmed'
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
     match 'users/sign_out' => 'devise/sessions#destroy',
     :controllers => { :sessions => "users/sessions" }
   end
+  resources :users_admin, :controller => 'users'
+
   get '/prescription', to: 'paper#first_step' , as: :prescription
   get '/', to: 'static_pages#home', as: :root
   get '/choose-medicine', to: 'paper#generate_pdf' , as: :choose

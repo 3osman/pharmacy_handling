@@ -38,6 +38,10 @@ label,input {
 
    <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %>
         <%= link_to "Patients", patients_path,class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %>
+            <%if current_user.try(:admin?)%>
+                <%= link_to "New User", new_users_admin_path, class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %> 
+            <%end%>
+
   <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link",style:"text-decoration:none;color: white;") %>        
   
 <% else %>
@@ -57,6 +61,9 @@ label,input {
 
   <%= link_to "Medicines", medicines_path,class: "mdl-navigation__link",style:"text-decoration:none;color: black;" %>
         <%= link_to "Patients", patients_path,class: "mdl-navigation__link",style:"text-decoration:none;color: black;" %>
+         <%if current_user.try(:admin?)%>
+                <%= link_to "New User", new_users_admin_path, class: "mdl-navigation__link",style:"text-decoration:none;color: white;" %> 
+            <%end%>
   <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "mdl-navigation__link",style:"text-decoration:none;color: black;") %>        
   
 <% else %>
