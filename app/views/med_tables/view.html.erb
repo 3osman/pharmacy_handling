@@ -1,0 +1,85 @@
+
+
+         
+<div class="demo-grid-1 mdl-grid">
+  <div class="mdl-cell mdl-cell--8-col" >
+
+    <h5>Patient History</h5>
+
+    <% if @med_table_entries.nil? || @med_table_entries.empty? %>
+    No history found
+    <% else %>
+      <table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">#</th>
+            <th class="mdl-data-table__cell--non-numeric">Date</th>
+
+           
+            <th >
+              <%= link_to url_for(:controller => :med_tables, :action => :delete_all,
+               :patient_id => @patient_id), method: :post, data: { confirm: 'You are deleting user history, are you sure?' }, id:"del-all", class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"text-decoration:none;font-size:12px;" do %>
+                <i class="material-icons">delete</i>
+                <% end %>
+                <div class="mdl-tooltip" for="del-all">
+                Erase History
+                </div>
+            </th>
+
+            
+
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% ind = 0 %>
+          <% @med_table_entries.each do |entry| %>
+            <tr>
+              <%ind += 1 %>
+              <td class="mdl-data-table__cell--non-numeric"><%= ind %></td>
+
+              
+              <td class="mdl-data-table__cell--non-numeric"><%= entry.pre_date %></td>
+              
+              <td><%= link_to url_for(
+              :controller => :med_tables, :action => :delete,
+               :patient_id => @patient_id,:m_id=> entry.id
+            ), method: :post, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"bottom:5px;text-decoration:none;font-size:12px;" do %>
+                <i class="material-icons">delete</i>
+                <% end %>
+               
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%end%>
+
+    <br>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">$(document).ready(function(){
+    $('#index-table').dataTable({
+    "sPaginationType": "simple_numbers",
+    "bPaginate": false,
+    "bFilter": true,
+    "bSort": true,
+    "aaSorting": [
+      [0, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": false,
+      "aTargets": [2]
+    },{
+      "bSearchable": false, 
+      "aTargets": [ 0 ]
+
+    }]
+  ,"oLanguage": { "sSearch": "" },
+   "bInfo" : false
+
+});
+});</script>

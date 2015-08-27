@@ -1,37 +1,45 @@
+<style>  
+  label,input {
+    font: normal 14px roboto !important;
+  }
+  .field_with_errors{
+    background-color: transparent;
+  }
+  #error_explanation{
+    background-color: transparent;
+  }
+
+</style>
+
 <%= form_for @user, url: users_admin_path(@user)  do |f| %>  
-  <fieldset>
-    <ol>
 
-      <div class="field">
-        <%= f.label :username %><br />
-        <%= f.text_field :username, autofocus: true %>
-      </div>
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.text_field :username, autofocus: true,class:"mdl-textfield__input", id:"user_t"  %>
+    <%= f.label :username, class:"mdl-textfield__label", for:"user_t" %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.password_field :password, autocomplete: "off", class:"mdl-textfield__input", id:"pass_t"  %>
+    <%= f.label :password, class:"mdl-textfield__label", for:"pass_t" %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"mdl-textfield__input", id:"passc_t"  %>
+    <%= f.label :password_confirmation, class:"mdl-textfield__label", for:"passc_t" %>
+  </div>
+      
 
-      <div class="field">
-        <%= f.label :password %>
-        <br />
-        <%= f.password_field :password, autocomplete: "off" %>
-      </div>
+      
+  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="admin">
+    <input type="checkbox" name="admin" id="admin" class="mdl-checkbox__input" />
+    <span class="mdl-checkbox__label">Admin</span>
+  </label>
 
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
-      <div class="field">
-        <%= f.label :admin %><br />
-        <%= f.check_box :admin %>
-
-      </div>
-
-    </ol>
-    <p>
-     <% if @user.new_record? %>
-        <%= f.submit "Create Account" %>
-      <% else %>
-        <%= f.submit "Update Account" %>
-      <% end %>
-      <%= link_to "Cancel", users_admin_index_path, class: 'button' %>
-    </p>
-    </p>
-  </fieldset>
+  <p>
+   <% if @user.new_record? %>
+      <%= f.submit "Create Account", class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+    <% else %>
+      <%= f.submit "Update Account", class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+    <% end %>
+    <%= link_to "Cancel", users_admin_index_path, class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+  </p>
+  
 <% end %>

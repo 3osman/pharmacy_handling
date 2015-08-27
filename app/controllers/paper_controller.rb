@@ -67,17 +67,26 @@ class PaperController < ApplicationController
 
     
     @medTableEntry = MedTableEntry.find(params[:med_table_entry_id])
+    @patient_id =  params[:patient]
+    @medtable_id = params[:medtableid]
     respond_to do |format|
         format.html # editmed.html.erb
         format.js # editmed.js.erb
         format.json { render json: @medTableEntry }
     end
   end
+
   def download_pdf
     @date = params[:date]
+    if @date.nil?
+      @date = Date.today
+    end
     @medicines = Array.new
     #@med_table_entries = Array.new
     #@patient = Patient.new
+    m = MedTable.find(params[:med_table_id])
+    m.pre_date = @date
+    m.save!
     @med_table_entries = (MedTable.find(params[:med_table_id])).med_table_entries
     @patient = Patient.find(params[:patient])
     @med_table_entries.each do |md|

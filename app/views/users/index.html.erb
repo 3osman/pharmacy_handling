@@ -1,0 +1,72 @@
+
+<section class="section--center mdl-grid mdl-grid--no-spacing">
+           
+<div class="demo-grid-1 mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col" >
+    <h5>Listing Users</h5>
+
+
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Username</th>
+      <th class="mdl-data-table__cell--non-numeric">Admin</th>
+      
+      
+      <th ></th>
+      <th ></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric"><%= user.username %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= user.admin %></td>
+        
+       
+        <td><%= link_to 'Edit',{:action => :edit, :controller => :users_admin,:id => user.id},class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td><%= link_to 'Delete', {:action => :delete, :controller => :users_admin,:id => user.id}, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
+</div>
+          </section>
+
+
+
+<script type="text/javascript">$(document).ready(function(){
+    $('#index-table').dataTable({
+    "sPaginationType": "simple_numbers",
+    "bPaginate": true,
+    "bFilter": true,
+    "bSort": true,
+    "sDom": '<"top"flp>rt<"bottom"i><"clear">',
+
+    "aaSorting": [
+      [0, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": true,
+      "aTargets": [0]
+    }, {
+      "bSortable": false,
+      "aTargets": [1,2,3]
+    }],"aoColumns": [
+      null,
+      
+     
+      { "bSearchable": false },
+      { "bSearchable": false },
+      { "bSearchable": false }
+    ] 
+  ,"oLanguage": { "sSearch": "" } ,
+  "bInfo" : false
+
+});
+});</script>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'med_tables/view'
+
   get 'paper/first_step'
 
   get 'paper/generate_pdf'
@@ -8,6 +10,9 @@ Rails.application.routes.draw do
   post 'paper/delete_entry'
   post 'paper/download_pdf'
   get 'paper/editmed'
+  get 'med_tables/view', as: :view_history
+  post 'med_tables/delete'
+  get 'med_tables/delete_all'
 
   resources :patients
   get 'static_pages/home'
@@ -19,6 +24,8 @@ Rails.application.routes.draw do
     :controllers => { :sessions => "users/sessions" }
   end
   resources :users_admin, :controller => 'users'
+  get 'users_admin/edit'
+  post 'users_admin/delete'
 
   get '/prescription', to: 'paper#first_step' , as: :prescription
   get '/', to: 'static_pages#home', as: :root

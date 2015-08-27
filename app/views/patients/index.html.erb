@@ -17,6 +17,8 @@
 
       <th class="mdl-data-table__cell--non-numeric">First Check In</th>
       <th ></th>
+      <th ></th>
+
       <th ><%= link_to new_patient_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect',style:"bottom:20px; z-index: 10;" do %>
 <i class="material-icons">add</i>
 
@@ -36,7 +38,9 @@ New Patient
         <td><%= patient.age %></td>
         <td><%= patient.phone_number%></td>
         <td class="mdl-data-table__cell--non-numeric"><%= patient.first_check_in %></td>
+        <td><%= link_to 'History', view_history_path(:patient_id => patient.id),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
         <td><%= link_to 'Edit', edit_patient_path(patient),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        
         <td><%= link_to 'Delete', patient, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
       </tr>
     <% end %>
@@ -65,10 +69,10 @@ New Patient
       "aTargets": [0,1]
     }, {
       "bSortable": false,
-      "aTargets": [2,3,4,5]
+      "aTargets": [2,3,4,5,6]
     },{
       "bSearchable": false, 
-      "aTargets": [ 4,5 ]
+      "aTargets": [ 4,5,6 ]
 
     }]
   ,"oLanguage": { "sSearch": "" },
