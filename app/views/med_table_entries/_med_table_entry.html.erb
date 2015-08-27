@@ -1,25 +1,25 @@
 
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded is-focused">
             <input class="mdl-textfield__input" type="text" name="instructions" id="instructions" value="<%= @medTableEntry.instruction%>"/>
-            <label class="mdl-textfield__label" for="sample1">Instructions</label>
+            <label class="mdl-textfield__label" for="instructions">Instructions</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded is-focused">
             <input class="mdl-textfield__input" type="text" name="duration" id="duration" value="<%= @medTableEntry.duration%>" />
             <label class="mdl-textfield__label" for="duration">Duration (Two weeks, One day, etc..)</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded is-focused">
             <input class="mdl-textfield__input" type="text" name="morning" id="morning" pattern="-?[0-9]*(\.[0-9]+)?" value="<%= @medTableEntry.morning%>"/>
             <label class="mdl-textfield__label" for="morning">Morning (Number of Pills)</label>
             <span class="mdl-textfield__error">Input is not a number!</span>
 
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded is-focused">
             <input class="mdl-textfield__input" type="text" name="afternoon" id="afternoon" pattern="-?[0-9]*(\.[0-9]+)?" value="<%= @medTableEntry.afternoon%>"/>
             <label class="mdl-textfield__label" for="afternoon">Afternoon (Number of Pills)</label>
             <span class="mdl-textfield__error">Input is not a number!</span>
 
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo is-upgraded is-focused">
             <input class="mdl-textfield__input" type="text" name="evening" id="evening" pattern="-?[0-9]*(\.[0-9]+)?" value="<%= @medTableEntry.evening%>"/>
             <label class="mdl-textfield__label" for="evening">Evening (Number of Pills)</label>
             <span class="mdl-textfield__error">Input is not a number!</span>
@@ -34,4 +34,9 @@
 
 
 
-      
+      <style>
+      .mdl-textfield__label:after{
+        bottom: 15px;
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+      </style>

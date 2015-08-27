@@ -17,8 +17,7 @@
 
            
             <th >
-              <%= link_to url_for(:controller => :med_tables, :action => :delete_all,
-               :patient_id => @patient_id), method: :post, data: { confirm: 'You are deleting user history, are you sure?' }, id:"del-all", class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"text-decoration:none;font-size:12px;" do %>
+              <%= link_to url_for(:controller => :med_tables, :action => :delete_all,:patient_id => @patient_id),method: :post, onclick:"return confirm('You are deleting user history, are you sure?')", id:"del-all", class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"text-decoration:none;font-size:12px;" do %>
                 <i class="material-icons">delete</i>
                 <% end %>
                 <div class="mdl-tooltip" for="del-all">

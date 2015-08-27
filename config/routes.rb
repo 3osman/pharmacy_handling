@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :templates
   get 'med_tables/view'
 
   get 'paper/first_step'
