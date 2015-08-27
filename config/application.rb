@@ -24,6 +24,8 @@ module AmrRails
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.enabled = true
     Rails.application.config.assets.paths << "#{Rails.root}/app/assets/files"
+    Rails.application.config.assets.paths << "#{Rails.root}/app/assets/images"
+
 
   end
 end
