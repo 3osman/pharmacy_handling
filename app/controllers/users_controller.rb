@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     def edit
         @user = User.find(params[:id])
     end
-    def delete
+    def destroy
         @user = User.find(params[:id])
         @user.destroy
         respond_to do |format|
@@ -33,13 +33,15 @@ class UsersController < ApplicationController
    
     def update
         @user = User.find(params[:id])
-        if @user.update_attributes(user_params)
+        if (!@user.username.eql?"") && @user.update_attributes(user_params)
             if params[:admin].eql?"on"
                 @user.admin = true
+            else
+                @user.admin = false
             end
-            redirect_to :root, notice: "Updated User."
+            redirect_to users_admin_index_path, notice: "Updated User."
         else
-            render :edit
+            render :edit, notice: "Problem Occured"
         end
     end
 
@@ -48,10 +50,11 @@ class UsersController < ApplicationController
         if params[:admin].eql?"on"
             @user.admin = true
         end
-        if @user.save
-            redirect_to :root, notice: "User succesfully created!" 
+        
+        if (!@user.username.eql?"") && @user.save
+            redirect_to users_admin_index_path, notice: "User succesfully created!" 
         else
-            render :new
+            render :new, notice: "Problem Occured"
         end
     end
 

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :authentication_keys => [:username]
-    def email_required?
+	def email_required?
 	  false
 	end
 

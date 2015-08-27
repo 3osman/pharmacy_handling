@@ -2,6 +2,12 @@
 
 	<div class="demo-grid-1 mdl-grid">
 	    <div class="mdl-cell mdl-cell--6-col" > 
+	    	<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
 	  		<h5>Edit User</h5>
 
 			<%= render 'eform' %>

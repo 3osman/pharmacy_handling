@@ -14,7 +14,13 @@
       
       
       <th ></th>
-      <th ></th>
+      <th ><%= link_to  new_users_admin_path, method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px;text-decoration:none;z-index: 10;" do %>
+          <i class="material-icons">add</i>
+          <% end %>
+          <div class="mdl-tooltip" for="add-b">
+          New User
+          </div>
+      </th>
 
     </tr>
   </thead>
@@ -23,11 +29,17 @@
     <% @users.each do |user| %>
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= user.username %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= user.admin %></td>
+        <td class="mdl-data-table__cell--non-numeric">
+          <% if user.admin %>
+            <i class="material-icons">done</i>
+          <%else %>
+            <i class="material-icons">clear</i>
+          <%end%>
+        </td>
         
        
-        <td><%= link_to 'Edit',{:action => :edit, :controller => :users_admin,:id => user.id},class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
-        <td><%= link_to 'Delete', {:action => :delete, :controller => :users_admin,:id => user.id}, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td><%= link_to 'Edit', edit_users_admin_path(user),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td><%= link_to 'Delete', {:action => :destroy, :controller => :users,:id => user.id}, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
       </tr>
     <% end %>
   </tbody>

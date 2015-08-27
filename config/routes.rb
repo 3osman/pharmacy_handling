@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   end
   resources :users_admin, :controller => 'users'
   get 'users_admin/edit'
-  post 'users_admin/delete'
 
   get '/prescription', to: 'paper#first_step' , as: :prescription
   get '/', to: 'static_pages#home', as: :root
