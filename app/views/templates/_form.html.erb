@@ -1,3 +1,16 @@
+<style>  
+  label,input {
+      font: normal 14px roboto !important;
+  }
+  .field_with_errors{
+    background-color: transparent;
+  }
+  #error_explanation{
+    background-color: transparent;
+  }
+
+</style>
+
 <%= form_for(@template) do |f| %>
   <% if @template.errors.any? %>
     <div id="error_explanation">
@@ -11,19 +24,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+ <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :name,class:"mdl-textfield__input" %>
+    <%= f.label :name,class:"mdl-textfield__label" %>
+
   </div>
-  <div class="field">
-    <%= f.label :symptoms %><br>
-    <%= f.text_field :symptoms %>
+  <br/>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :symptoms,class:"mdl-textfield__input"  %>
+    <%= f.label :symptoms,class:"mdl-textfield__label" %>
+
   </div>
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.text_field :duration %>
+  <br/>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.text_field :duration,class:"mdl-textfield__input" %>
+    <%= f.label :duration,class:"mdl-textfield__label" %>
+
   </div>
+  <br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Next',class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect", style:"text-decoration:none;font-size:12px;" %>
+    <%= link_to 'Back', templates_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
   </div>
 <% end %>

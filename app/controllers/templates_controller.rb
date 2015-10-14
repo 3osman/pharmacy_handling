@@ -25,10 +25,11 @@ class TemplatesController < ApplicationController
   # POST /templates.json
   def create
     @template = Template.new(template_params)
-
+    @med_table = MedTable.new
+    @med_table.template = @template
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Template was successfully created.' }
+        format.html { redirect_to @template, med_id: @med_table.id, notice: 'Template was successfully created, add prescription now' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
@@ -40,9 +41,10 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
+    @med_id = @template.med_table.id
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+        format.html { redirect_to @template, med_id: @med_table.id, notice: 'Template was successfully updated, update prescription now' }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
