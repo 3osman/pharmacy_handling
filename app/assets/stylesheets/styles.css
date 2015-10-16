@@ -256,3 +256,23 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
+.paginate_button {
+  margin-left: 7px;
+  margin-right: 7px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color:#E6E6E6;
+  color: black;
+  border-radius: 25px;
+}
+.paginate_button:hover {
+  text-decoration:none;
+  cursor: pointer;
+  border-radius: 25px;
+
+  }
+.paging_simple_numbers{
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+}
