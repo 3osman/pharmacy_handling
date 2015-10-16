@@ -12,6 +12,17 @@
 </style>
 
 <%= form_for @user, url: users_admin_index_path(@user)  do |f| %> 
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
     <%= f.text_field :username, autofocus: true,class:"mdl-textfield__input", id:"user_t"  %>

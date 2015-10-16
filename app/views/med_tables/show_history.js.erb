@@ -1,0 +1,4 @@
+$modal = $('#showHistoryModal'),
+$modalBody = $('#showHistoryModal .modal-body'),
+$modalBody.html("<%= j render(:partial => 'med_tables/med_table') %>");
+$modal.modal();

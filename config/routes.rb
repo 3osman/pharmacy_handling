@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'paper/delete_entry'
   post 'paper/download_pdf'
   get 'paper/editmed'
+  get 'med_tables/show_history'
+
   get 'med_tables/view', as: :view_history
   post 'med_tables/delete'
   get 'med_tables/delete_all'

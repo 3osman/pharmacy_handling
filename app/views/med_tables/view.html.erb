@@ -6,7 +6,7 @@
 
     <h5>Patient History</h5>
 
-    <% if @med_table_entries.nil? || @med_table_entries.empty? %>
+    <% if @med_tables.nil? || @med_tables.empty? %>
     No history found
     <% else %>
       <table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -14,8 +14,11 @@
           <tr>
             <th class="mdl-data-table__cell--non-numeric">#</th>
             <th class="mdl-data-table__cell--non-numeric">Date</th>
+            <th class="mdl-data-table__cell--non-numeric">Printed</th>
 
-           
+
+           <th> </th>
+            <th> </th>
             <th >
               <%= link_to url_for(:controller => :med_tables, :action => :delete_all,:patient_id => @patient_id),method: :post, onclick:"return confirm('You are deleting user history, are you sure?')", id:"del-all", class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"text-decoration:none;font-size:12px;" do %>
                 <i class="material-icons">delete</i>
@@ -24,6 +27,7 @@
                 Erase History
                 </div>
             </th>
+            
 
             
 
@@ -32,22 +36,40 @@
         
         <tbody>
           <% ind = 0 %>
-          <% @med_table_entries.each do |entry| %>
+          <% @med_tables.each do |entry| %>
             <tr>
               <%ind += 1 %>
               <td class="mdl-data-table__cell--non-numeric"><%= ind %></td>
 
               
               <td class="mdl-data-table__cell--non-numeric"><%= entry.pre_date %></td>
-              
-              <td><%= link_to url_for(
+              <%if entry.printed%>
+                <td class="mdl-data-table__cell--non-numeric">Yes</td>
+              <%else%>
+                <td class="mdl-data-table__cell--non-numeric">No</td>
+              <%end%>
+              <td style="width:30px;"><%= link_to(
+                  url_for(
+                    :controller => :med_tables, :action => :show_history,
+                     :patient=> @patient_id,:medtableid=> entry.id
+                  ),
+                  :method => :get,remote: true ,class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style:"bottom:8px;text-decoration:none;font-size:12px;")  do %>
+                   
+
+                      Details
+                  <% end %>
+              </td>
+              <td style="width:30px;"><%= link_to 'Use', choose_path(:patient => @patient_id, :from_add=>false, :medtable_id=>entry.id),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %>
+              </td>
+              <td style="width:30px;"><%= link_to url_for(
               :controller => :med_tables, :action => :delete,
                :patient_id => @patient_id,:m_id=> entry.id
-            ), method: :post, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored",style:"bottom:5px;text-decoration:none;font-size:12px;" do %>
-                <i class="material-icons">delete</i>
+            ), method: :post, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" do %>
+                delete
                 <% end %>
                
               </td>
+              
             </tr>
           <% end %>
         </tbody>
@@ -71,10 +93,10 @@
     ],
     "aoColumnDefs": [{
       "bSortable": false,
-      "aTargets": [2]
+      "aTargets": [0,3,4,5]
     },{
       "bSearchable": false, 
-      "aTargets": [ 0 ]
+      "aTargets": [ 0,3,4,5 ]
 
     }]
   ,"oLanguage": { "sSearch": "" },

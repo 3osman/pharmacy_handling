@@ -1,16 +1,20 @@
-<style>  
-  label,input {
-      font: normal 14px roboto !important;
-  }
-  .field_with_errors{
-    background-color: transparent;
-  }
-  #error_explanation{
-    background-color: transparent;
-  }
+  <style>  
+label,input {
+    font: normal 12px roboto !important;
+}
+h5{
+    font: normal 20px roboto !important;
+}
+td,tr {
+      font: normal 12px roboto !important;
 
-</style>
+  }
+.field_with_errors{background-color: transparent;}
+#error_explanation{background-color: transparent;}
+</style>  
 
+<div class="mdl-cell mdl-cell--3-col" > 
+<h5> New Template </h5>
 <%= form_for(@template) do |f| %>
   <% if @template.errors.any? %>
     <div id="error_explanation">
@@ -42,8 +46,199 @@
 
   </div>
   <br/>
-  <div class="actions">
-    <%= f.submit 'Next',class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect", style:"text-decoration:none;font-size:12px;" %>
+  
+</div>  
+
+
+<div class="demo-grid-1 mdl-grid">
+  
+  
+  <div class="mdl-cell mdl-cell--3-col" >
+    <h5>Prescription</h5>
+    <%@entries = MedTableEntry.where(med_table_id: @medtable.id) %>
+    <%if @entries.nil? || @entries.empty?%>
+    No prescriptions yet
+    <%else%>
+    <table id="pre-table" class="mdl-data-table mdl-js-data-table">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Instructions</th>
+      <th class="mdl-data-table__cell--non-numeric">Duration</th>
+      <th class="mdl-data-table__cell--non-numeric">Morning</th>
+      <th class="mdl-data-table__cell--non-numeric">Afternoon</th>
+      <th class="mdl-data-table__cell--non-numeric">Evening</th>
+      <th></th>
+      <th><%= link_to  url_for(
+        :controller => :paper, :action => :add_empty,
+         :patient=> @patient_id,:medtableid=> @medtable.id
+      ), method: :get, id:"add-b",class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect', style:"bottom:20px;text-decoration:none;z-index: 10;" do %>
+<i class="material-icons">add</i>
+<% end %>
+<div class="mdl-tooltip" for="add-b">
+Add Empty Row
+</div></th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    
+      <%@entries.each do |e|%>
+      <tr>
+       <td>
+        <% if e.medicine %>
+        <%= e.medicine.name %>
+        <%end%>
+      </td>
+      <td>
+        <%= e.instruction%>
+      </td>
+      <td>
+        <%= e.duration%>
+      </td>
+      <td>
+        <%= e.morning%>
+      </td>
+      <td>
+        <%= e.afternoon%>
+      </td>
+      <td>
+        <%= e.evening%>
+      </td>
+       
+       
+       <td>
+
+
+
+<%= link_to(
+      url_for(
+        :controller => :paper, :action => :editmed,
+         :patient=> @patient_id,:medtableid=> @medtable.id,:med_table_entry_id => e.id
+      ),
+      :method => :get,remote: true ,class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style:"bottom:8px;text-decoration:none;font-size:12px;")  do %>
+       
+
+Edit
+        <% end %></td>
+      <td><%= link_to(
+      url_for(
+        :controller => :paper, :action => :delete_entry,
+         :patient=> @patient_id,:medtableid=> @medtable.id,:med_table_entry_id => e.id
+      ),
+      :method => :post,data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", style:"bottom:8px;text-decoration:none;font-size:12px;")  do %>
+       
+
+Delete
+        <% end %>
+       
+      </td>
+     
+     </tr>
+       
+    <%end%>
+  </tbody>
+</table>
+
+<%end%>
+
+
+<div class="actions">
+    <%= f.button :submit, name: "medtableid",value: @medtable.id,class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect", style:"text-decoration:none;font-size:12px;" %>
     <%= link_to 'Back', templates_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
   </div>
-<% end %>
+<%end%>
+
+</div>
+
+ <div class="mdl-cell mdl-cell--10-col" >
+    <h5>Add to Prescription</h5>
+
+<table id="index-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th></th>
+
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Type</th>
+      <th class="mdl-data-table__cell--non-numeric">Category</th>
+      <th class="mdl-data-table__cell--non-numeric">Usage</th>
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Medicine.all.each do |medicine| %>
+      <tr>
+       <td>
+
+<%= link_to "#chooseMedicineModal", class:"mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored","data-toggle" => "modal", style:"bottom:8px;text-decoration:none;font-size:12px;","data-id" => medicine.id,"data-name" => medicine.name, id:"choose-medicine" do %><i class="material-icons">done</i><% end %>  
+          
+         </td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.name %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.m_type %></td>
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.category %></td>       
+        <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
+         
+         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div> 
+</div>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+    $('#index-table').dataTable({
+    "sPaginationType": "simple_numbers",
+    "bPaginate": true,
+    "bFilter": true,
+    "xScroll": true,
+    "bSort": true,
+    "sDom": '<"top"flp>rt<"bottom"i><"clear">',
+
+    "aaSorting": [
+      [1, "asc"]
+    ],
+    "aoColumnDefs": [{
+      "bSortable": true,
+      "aTargets": [1,2,3,4]
+    }, {
+      "bSortable": false,
+      "aTargets": [0]
+    }],"aoColumns": [
+      { "bSearchable": false },
+
+      null,
+      null,
+      null,
+      null
+
+     
+    ] 
+  ,"oLanguage": { "sSearch": "" } ,
+  "bInfo" : false
+
+});
+
+$('#pre-table').dataTable({
+  "oLanguage": { "sSearch": "" } ,
+  "bInfo" : false,
+  "bPaginate": false,
+  "aoColumnDefs": [{
+    "bSortable" : false,
+    "aTargets" : [2,3,4,5,6,7]
+  },
+  {
+    "bSearchable": false,
+    "aTargets":[2,3,4,5,6,7]
+  }]
+    });
+});</script>

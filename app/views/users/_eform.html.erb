@@ -11,21 +11,41 @@
 
 </style>
 
-<%= form_for @user, url: users_admin_path(@user)  do |f| %>  
+<%= form_for @user, url: users_admin_path(@user)  do |f| %>
+<h5>Edit <%=@user.username%></h5>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% if (@user.username.eql?"admin") && @user.admin %>
 
+<%else%>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
     <%= f.text_field :username, autofocus: true,class:"mdl-textfield__input", id:"user_t"  %>
     <%= f.label :username, class:"mdl-textfield__label", for:"user_t" %>
   </div>
+  <%end%>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
     <%= f.password_field :password, autocomplete: "off", class:"mdl-textfield__input", id:"pass_t"  %>
     <%= f.label :password, class:"mdl-textfield__label", for:"pass_t" %>
   </div>
-
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"mdl-textfield__input", id:"passc_t"  %>
+    <%= f.label :password_confirmation, class:"mdl-textfield__label", for:"passc_t" %>
+  </div>
       
 <br />
+<% if (@user.username.eql?"admin") && @user.admin %>
+<%else%>
   <%= f.check_box :admin%>
   <%= f.label :admin %>
+    <%end%>
+
  
   <p>
    <% if @user.new_record? %>

@@ -10,5 +10,10 @@ class User < ActiveRecord::Base
 	def email_changed?
 	  false
 	end
+	validates :username, :presence => true
+
+	validates :password, :presence => true,  :confirmation => true
+
+
 
 end

@@ -1,0 +1,72 @@
+
+<table id="history" class="mdl-data-table mdl-js-data-table">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Instructions</th>
+      <th class="mdl-data-table__cell--non-numeric">Duration</th>
+      <th class="mdl-data-table__cell--non-numeric">Morning</th>
+      <th class="mdl-data-table__cell--non-numeric">Afternoon</th>
+      <th class="mdl-data-table__cell--non-numeric">Evening</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    <%@medTableEntries.each do |e|%>
+      <tr>
+       <td style="text-align: left;">
+        <% if e.medicine %>
+        <%= e.medicine.name %>
+        <%end%>
+      </td>
+      <td style="text-align: left;">
+        <%= e.instruction%>
+      </td>
+      <td style="text-align: left;">
+        <%= e.duration%>
+      </td>
+      <td style="text-align: left;">
+        <%= e.morning%>
+      </td>
+      <td style="text-align: left;">
+        <%= e.afternoon%>
+      </td>
+      <td style="text-align: left;">
+        <%= e.evening%>
+      </td>
+    <%end%>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var table = $('#history').DataTable( {
+        "bSort": false,
+        "bFilter": false,
+        "bInfo": false,
+        "sPaginationType": "simple_numbers",
+
+
+        "bPaginate": true,
+        "bStateSave": false,
+        "bAutoWidth": false,
+        //true
+        "bScrollAutoCss": true,
+        
+        "bJQueryUI": true,
+        //"sDom": 't',
+        "sDom": '<"top"flp>rt<"bottom"i><"clear">',
+        //"sScrollY": "500px",
+        //"sScrollX": "100%",
+        "sScrollXInner": "110%",
+        "fnInitComplete": function() {
+            this.css("visibility", "visible");
+        }
+    } );
+    var tableId = 'history';
+$('<div style="width: 550px; overflow: auto"></div>').append($('#' + tableId)).insertAfter($('#' + tableId + '_wrapper div').first());
+
+  });
+
+</script>

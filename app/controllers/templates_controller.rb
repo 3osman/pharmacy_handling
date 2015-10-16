@@ -14,7 +14,14 @@ class TemplatesController < ApplicationController
 
   # GET /templates/new
   def new
+    session[:return_to] = request.referer
+
     @template = Template.new
+    @medtable = MedTable.new
+    @medtable.from_template = true
+    @medtable.template_id = @template.id
+    @from_tem = true
+
   end
 
   # GET /templates/1/edit
@@ -25,8 +32,10 @@ class TemplatesController < ApplicationController
   # POST /templates.json
   def create
     @template = Template.new(template_params)
-    @med_table = MedTable.new
+
+    @med_table = MedTable.find(params[:medtableid]) #add med table from view page
     @med_table.template = @template
+    @med_table.save!
     respond_to do |format|
       if @template.save
         format.html { redirect_to @template, med_id: @med_table.id, notice: 'Template was successfully created, add prescription now' }

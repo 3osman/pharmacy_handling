@@ -54,6 +54,8 @@ class PaperController < ApplicationController
     if !params[:from_add]
     	medtable = MedTable.new
     	medtable.patient = @patient
+      medtable.printed = false
+      medtable.pre_date = Date.today
     	medtable.save!
       @medtable_id = medtable.id
     else 
@@ -72,20 +74,20 @@ class PaperController < ApplicationController
     respond_to do |format|
         format.html # editmed.html.erb
         format.js # editmed.js.erb
-        format.json { render json: @medTableEntry }
     end
   end
 
   def download_pdf
     @date = params[:date]
-    if @date.nil?
-      @date = Date.today
-    end
+    
     @medicines = Array.new
     #@med_table_entries = Array.new
     #@patient = Patient.new
     m = MedTable.find(params[:med_table_id])
-    m.pre_date = @date
+    if !(@date.nil?)
+      m.pre_date = @date
+    end
+    m.printed = true
     m.save!
     @med_table_entries = (MedTable.find(params[:med_table_id])).med_table_entries
     @patient = Patient.find(params[:patient])
@@ -130,9 +132,16 @@ class PaperController < ApplicationController
     #@medtable_id = params[:medtableid]
     #@medicines_add.push("dfd")
     @from_add = true
+    fr = params[:from_tem]
+    if !(fr.eql?"") && fr
+      puts "++++++++++++++++++++++++"
+      print fr
+      puts "++++++++++++++++++++++++"
+      redirect_to :back
 
-    redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
-
+    else
+      redirect_to :action => :generate_pdf, :patient =>  params[:patient], :medtable_id => params[:medtableid], :from_add => @from_add
+    end 
   end
   def add_empty
     medTableEntry = MedTableEntry.new

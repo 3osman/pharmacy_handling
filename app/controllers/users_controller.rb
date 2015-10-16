@@ -51,7 +51,7 @@ class UsersController < ApplicationController
             @user.admin = true
         end
         
-        if (!@user.username.eql?"") && @user.save
+        if @user.save
             redirect_to users_admin_index_path, notice: "User succesfully created!" 
         else
             render :new, notice: "Problem Occured"

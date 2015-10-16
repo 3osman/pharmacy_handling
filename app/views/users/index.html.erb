@@ -39,7 +39,15 @@
         
        
         <td><%= link_to 'Edit', edit_users_admin_path(user),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
-        <td><%= link_to 'Delete', {:action => :destroy, :controller => :users,:id => user.id}, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <td> 
+          <%if user.id != current_user.id%>
+            <% if (user.username.eql?"admin") %>
+            <%else%>
+              <%= link_to 'Delete', {:action => :destroy, :controller => :users,:id => user.id}, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %>  
+            <%end%>      
+          <%end%>
+
+        </td>
       </tr>
     <% end %>
   </tbody>
