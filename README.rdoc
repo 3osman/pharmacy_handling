@@ -1,28 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple pharmacy managing up using material design lite for interface design http://www.getmdl.io/
 
-Things you may want to cover:
+Features: 
 
-* Ruby version
+* Ships with an Admin user, who can add users or admins later.
 
-* System dependencies
+* Admins can: manage users, add medicines from file or manually.
 
-* Configuration
+* Keeps record of patients, and keeps track of their prescription history. You can reuse previous prescriptions
 
-* Database creation
+* You create a prescription by choosing a patient, and assigning medicines with instructions to him.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* A pdf is generated with the prescription details, and ready to be printed.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+

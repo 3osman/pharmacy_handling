@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'paper/generate_pdf'
   post 'paper/add_to_medicines', as: :add_m 
   get 'paper/add_empty'
-
+  get 'medicine/upload'
   post 'paper/delete_entry'
   post 'paper/download_pdf'
   get 'paper/editmed'
