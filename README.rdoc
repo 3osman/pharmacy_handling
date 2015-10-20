@@ -1,6 +1,6 @@
 == README
 
-A simple pharmacy managing up using material design lite for interface design http://www.getmdl.io/
+A simple pharmacy managing app using material design lite for interface design http://www.getmdl.io
 
 Features: 
 
