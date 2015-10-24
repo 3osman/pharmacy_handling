@@ -97,6 +97,7 @@ class MedicinesController < ApplicationController
       category = sheet.name
       sheet.each 1 do |row|
           begin
+          total += 1
           m = Medicine.new
           m.usage = row[0]
           m.m_type = row[5]
@@ -114,7 +115,10 @@ class MedicinesController < ApplicationController
       end
     end
     after = Medicine.count
-    return after - bef
+    added = after - bef
+    not_added = total - added
+    
+    return " #{added}, #{not_added}"
   end
   def upload
     if !params[:file].nil?
@@ -123,7 +127,9 @@ class MedicinesController < ApplicationController
       path = File.join(directory, name)
       File.open(path, "wb") { |f| f.write(params[:file].read) }
       total = parse_file
-      flash[:notice] = "File uploaded, #{total} medicines saved."
+      added = total.split(",")[0]
+      no = total.split(",")[1]
+      flash[:notice] = "File uploaded, #{added} medicines saved, #{no} not saved."
       redirect_to upload_file_path
 
     else
