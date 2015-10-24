@@ -81,9 +81,52 @@ class MedicinesController < ApplicationController
     end
   end
 
-  def upload
+  def new_file
   end
 
+  def parse_file
+    errors_m = Array.new
+    require 'spreadsheet'
+    Spreadsheet.client_encoding = 'UTF-8'
+    book = Spreadsheet.open File.join(Rails.root, "app/assets/files/excel.xls")
+
+    for i in 0..13
+      sheet = book.worksheet i
+      category = sheet.name
+      k = 0
+      sheet.each 1 do |row|
+          k += 1
+          begin
+          m = Medicine.new
+          m.usage = row[0]
+          m.m_type = row[5]
+          m.name = row[3]
+          m.category = category
+          m.save!
+          rescue Exception => e
+        #puts m.name
+            er = "Error in sheet #{category}, row #{k}, medicine #{m.name}: doesn't follow format or duplicated"
+            errors_m.push er
+        end
+      end
+    end
+    return errors_m
+  end
+  def upload
+    if !params[:file].nil?
+      name = "excel.xls"
+      directory = "app/assets/files"
+      path = File.join(directory, name)
+      File.open(path, "wb") { |f| f.write(params[:file].read) }
+      @errors = parse_file
+      flash[:notice] = "File uploaded"
+      redirect_to action: "new_file"
+
+    else
+      flash[:alert] = 'No file selected'
+      redirect_to action: "new_file" 
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_medicine

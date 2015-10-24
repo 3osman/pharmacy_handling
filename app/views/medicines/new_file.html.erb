@@ -1,0 +1,36 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing">
+	<div class="mdl-cell mdl-cell--1-col"> 
+	</div>		
+	<div class="mdl-cell mdl-cell--4-col" style="margin-top: 30px;" > 
+		<h4>Upload File</h4>
+		
+			<h6>Upload an excel file to add medicines batch</h6>
+
+		
+		<%= form_tag '/medicines/upload', multipart: true do %>
+			<div class="mdl-textfield mdl-js-textfield">
+
+				<%= file_field_tag "file", id:"file" %>
+		    	
+		        
+		    </div>
+			
+			<div class="actions">
+    			<%= submit_tag 'Save', class:"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+				
+			</div>
+		<% end %>
+	</div>
+	<row>
+		<div class="mdl-cell mdl-cell--12-col">
+			<% if !@errors.nil? %>
+				<%@errors.each do e %>
+					<%=e%>
+					<br>
+
+				<%end%>
+			<%end%>
+		</div>
+	</row>
+</section>
+

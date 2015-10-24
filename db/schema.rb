@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015095712) do
+ActiveRecord::Schema.define(version: 20151024160900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20151015095712) do
     t.string   "m_type"
     t.string   "category"
   end
+
+  add_index "medicines", ["name", "m_type"], name: "index_medicines_on_name_and_m_type", unique: true, using: :btree
 
   create_table "patients", force: :cascade do |t|
     t.string   "name"
