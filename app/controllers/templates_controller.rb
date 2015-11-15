@@ -53,7 +53,7 @@ class TemplatesController < ApplicationController
     @med_id = @template.med_table.id
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, med_id: @med_table.id, notice: 'Template was successfully updated, update prescription now' }
+        format.html { redirect_to @template, med_id: @med_id, notice: 'Template was successfully updated, update prescription now' }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }

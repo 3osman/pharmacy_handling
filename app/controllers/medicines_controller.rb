@@ -24,6 +24,11 @@ class MedicinesController < ApplicationController
 
   # GET /medicines/1/edit
   def edit
+    if !current_user.try(:admin?)
+      flash[:alert] = 'You are not an Admin'
+      redirect_to action: "index"
+    end
+
   end
 
   # POST /medicines
@@ -74,11 +79,18 @@ class MedicinesController < ApplicationController
   # DELETE /medicines/1
   # DELETE /medicines/1.json
   def destroy
-    @medicine.destroy
-    respond_to do |format|
-      format.html { redirect_to medicines_url, notice: 'Medicine was successfully destroyed.' }
-      format.json { head :no_content }
+     if current_user.try(:admin?)
+      @medicine.destroy
+      respond_to do |format|
+        format.html { redirect_to medicines_url, notice: 'Medicine was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:alert] = 'You are not an Admin'
+      redirect_to action: "index"
     end
+    
+    
   end
 
   def new_file

@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class PatientsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include FactoryGirl::Syntax::Methods
   setup do
-    @patient = patients(:one)
+    @user = FactoryGirl.create :admin
+    sign_in @user
+    @patient = patients(:one) 
   end
 
   test "should get index" do
@@ -21,7 +25,7 @@ class PatientsControllerTest < ActionController::TestCase
       post :create, patient: { age: @patient.age, first_check_in: @patient.first_check_in, name: @patient.name }
     end
 
-    assert_redirected_to patient_path(assigns(:patient))
+    assert_redirected_to patients_path
   end
 
   test "should show patient" do
@@ -36,7 +40,7 @@ class PatientsControllerTest < ActionController::TestCase
 
   test "should update patient" do
     patch :update, id: @patient, patient: { age: @patient.age, first_check_in: @patient.first_check_in, name: @patient.name }
-    assert_redirected_to patient_path(assigns(:patient))
+    assert_redirected_to patients_path
   end
 
   test "should destroy patient" do

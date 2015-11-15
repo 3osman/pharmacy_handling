@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class MedicinesControllerTest < ActionController::TestCase
-  setup do
+  include Devise::TestHelpers
+  include FactoryGirl::Syntax::Methods
+  
+  setup do 
+    @user = FactoryGirl.create :admin
+    sign_in @user
     @medicine = medicines(:one)
   end
 
@@ -21,7 +26,8 @@ class MedicinesControllerTest < ActionController::TestCase
       post :create, medicine: { availability: @medicine.availability, name: @medicine.name, quantity: @medicine.quantity, side_effects: @medicine.side_effects, usage: @medicine.usage }
     end
 
-    assert_redirected_to medicine_path(assigns(:medicine))
+    assert_redirected_to medicines_path
+  
   end
 
   test "should show medicine" do
@@ -36,8 +42,9 @@ class MedicinesControllerTest < ActionController::TestCase
 
   test "should update medicine" do
     patch :update, id: @medicine, medicine: { availability: @medicine.availability, name: @medicine.name, quantity: @medicine.quantity, side_effects: @medicine.side_effects, usage: @medicine.usage }
-    assert_redirected_to medicine_path(assigns(:medicine))
+    assert_redirected_to medicines_path
   end
+  
 
   test "should destroy medicine" do
     assert_difference('Medicine.count', -1) do

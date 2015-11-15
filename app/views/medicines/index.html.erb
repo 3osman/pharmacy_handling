@@ -44,8 +44,12 @@
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.category %></td>       
         <td class="mdl-data-table__cell--non-numeric"><%= medicine.usage %></td>
        
-        <td><%= link_to 'Edit', edit_medicine_path(medicine),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <%if current_user.admin?%><td><%= link_to 'Edit', edit_medicine_path(medicine),class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
         <td><%= link_to 'Delete', medicine, method: :delete, data: { confirm: 'Are you sure?' },class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",style:"bottom:8px;text-decoration:none;font-size:12px;" %></td>
+        <%else%>
+        <td></td>
+        <td></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>

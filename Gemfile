@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'pg'
+gem 'factory_girl_rails'
+
 gem 'certified'
 gem 'prawn'
 gem 'rails-erd'
@@ -48,6 +50,11 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'guard-minitest', '~> 2.3.2' # https://github.com/guard/guard-minitest
+  # Colorize minitest output and show failing tests instantly.
+  gem 'minitest-colorize', git: 'https://github.com/ysbaddaden/minitest-colorize' 
+  # https://github.com/Springest/terminal-notifier-guard
+  gem 'terminal-notifier-guard', '~> 1.5.3'
 end
 group :production do
   gem 'rails_12factor'

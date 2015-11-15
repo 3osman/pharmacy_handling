@@ -35,18 +35,26 @@ class PaperController < ApplicationController
       row(0).font_style = :bold
       self.header = true
       self.row_colors = ['DDDDDD', 'FFFFFF']
-      self.column_widths = [100, 100, 100,80,80,80]
+      self.column_widths = [100, 100,80,80,80]
+    end
+    pdf.table rows do
+      
+      self.row_colors = ['DDDDDD', 'FFFFFF']
+      self.column_widths = [100, 100,80,80,80]
     end
   end
  
   def product_rows
-    [['Name', 'Usage', 'Instructions','Morning','Afternoon','Evening']] +
+    [['Name', 'Instructions','Morning','Afternoon','Evening']] 
+  end
+  def rows
+    
       @medicines.map do |product|
-      [product.name, product.usage]
-    end 
-    @med_table_entries.map do |md|
-      [md.instruction, md.morning, md.afternoon, md.evening]
-    end
+        [product.name]
+      end + @med_table_entries.map do |md|
+        [md.instruction, md.morning, md.afternoon, md.evening]
+      end
+
   end
 
   def generate_pdf
@@ -99,6 +107,9 @@ class PaperController < ApplicationController
       format.pdf do
         require 'prawn'
         pdf = Prawn::Document.new(:page_layout => :landscape,:page_size => 'A4')
+        
+        #pdf.font Rails.root.join('app', 'assets', 'fonts', 'trado.ttf')
+        #pdf.text_direction = :rtl
         
         #pdf = ReportPdf.new(@patient, @med_table_entries, @medicines, @date)
         
